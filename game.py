@@ -55,14 +55,24 @@ def main():
         print('Ход сделан!')
         game.display()  # Перерисовать поле с учётом сделанного хода.
 
+        file = 'results.txt'
         if game.check_win(current_player):
             print(f'Вы победили {current_player}!')
+            save_result(file, f'Победили {current_player}')
             running = False
         if game.is_board_full():
             print('Ничья!')
+            save_result(file, 'Ничья!')
             running = False
 
         current_player = 'O' if current_player == 'X' else 'X'
+
+
+def save_result(file, strng):
+    # Открыть на запись файл example.txt
+    file = open(file, 'a', encoding='utf-8')
+    file.write(strng + '\n')
+    file.close()
 
 
 if __name__ == '__main__':
